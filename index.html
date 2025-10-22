@@ -1,2 +1,204 @@
-# ThomasRicart.github.io
-Personnal and educational website
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Grid : 2 tuiles par ligne</title>
+<style>
+  :root{
+    --bg: #f6f7fb;
+    --card: #ffffff;
+    --accent: #4f46e5;
+    --muted: #6b7280;
+    --radius: 12px;
+    --gap: 20px;
+    --shadow: 0 6px 18px rgba(15,23,42,0.06);
+    font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  }
+
+  body{
+    margin:0;
+    background:var(--bg);
+    color:#111827;
+    -webkit-font-smoothing:antialiased;
+    -moz-osx-font-smoothing:grayscale;
+    padding:32px;
+  }
+
+  .wrap{
+    max-width:1100px;
+    margin:0 auto;
+  }
+
+  h1{
+    margin:0 0 18px 0;
+    font-size:1.4rem;
+    letter-spacing: -0.2px;
+  }
+
+  /* Grid : 2 tuiles par ligne */
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* <-- deux tuiles par ligne */
+    gap: var(--gap);
+    align-items: start;
+  }
+
+  /* Responsive : 1 tuile sur petits écrans */
+  @media (max-width: 720px){
+    .grid { grid-template-columns: 1fr; }
+  }
+
+  .tile {
+    background: var(--card);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    padding:18px;
+    display: flex;
+    gap:14px;
+    align-items: flex-start;
+    transition: transform .18s ease, box-shadow .18s ease;
+    border: 1px solid rgba(15,23,42,0.04);
+  }
+  .tile:focus-within,
+  .tile:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 14px 30px rgba(15,23,42,0.08);
+    outline: none;
+  }
+
+  .thumb {
+    width:92px;
+    height:92px;
+    border-radius:10px;
+    flex: 0 0 92px;
+    display:block;
+    object-fit:cover;
+    background: linear-gradient(135deg,#eef2ff,#eefcf6);
+    border:1px solid rgba(0,0,0,0.03);
+  }
+
+  .content{
+    flex:1;
+    min-width:0; /* important pour le texte tronqué */
+  }
+
+  .title{
+    margin:0 0 6px 0;
+    font-size:1rem;
+    font-weight:600;
+    color:#0f172a;
+  }
+
+  .desc{
+    margin:0 0 10px 0;
+    color:var(--muted);
+    font-size:0.925rem;
+    line-height:1.35;
+    display:-webkit-box;
+    -webkit-line-clamp:3;
+    -webkit-box-orient:vertical;
+    overflow:hidden;
+  }
+
+  .meta{
+    display:flex;
+    gap:8px;
+    align-items:center;
+    font-size:0.85rem;
+    color:var(--muted);
+  }
+
+  .btn{
+    margin-left:auto;
+    background:var(--accent);
+    color:white;
+    border:none;
+    padding:8px 12px;
+    border-radius:8px;
+    font-weight:600;
+    cursor:pointer;
+    font-size:0.9rem;
+    transition:opacity .12s ease, transform .12s ease;
+  }
+  .btn:active{ transform: translateY(1px); }
+  .btn:focus{ outline: 3px solid rgba(79,70,229,0.18); }
+
+  /* small utility to make the whole tile keyboard clickable (if link) */
+  .tile a.tile-link{
+    display:flex;
+    text-decoration:none;
+    color:inherit;
+    width:100%;
+  }
+
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <h1>Exemple : tuilage 2 par ligne</h1>
+
+    <div class="grid" role="list">
+      <!-- Tuile 1 -->
+      <article class="tile" role="listitem" aria-label="Tuile 1 — Exemple">
+        <img class="thumb" src="https://picsum.photos/seed/1/200" alt="Image 1">
+        <div class="content">
+          <h2 class="title">Titre de la tuile 1</h2>
+          <p class="desc">Ceci est une courte description pour la tuile numéro 1. Elle illustre comment placer du texte et limiter son affichage si besoin.</p>
+          <div class="meta">
+            <span>❤️ 24</span>
+            <span>•</span>
+            <span>2 min</span>
+            <button class="btn" type="button" aria-label="Ouvrir tuile 1">Ouvrir</button>
+          </div>
+        </div>
+      </article>
+
+      <!-- Tuile 2 -->
+      <article class="tile" role="listitem" aria-label="Tuile 2 — Exemple">
+        <img class="thumb" src="https://picsum.photos/seed/2/200" alt="Image 2">
+        <div class="content">
+          <h2 class="title">Titre de la tuile 2</h2>
+          <p class="desc">Texte d'exemple pour la deuxième tuile. Utilisez ces tuiles pour montrer des cartes produit, des articles, ou n'importe quel contenu en bloc.</p>
+          <div class="meta">
+            <span>📁 Catégorie</span>
+            <span>•</span>
+            <span>10 min</span>
+            <button class="btn" type="button" aria-label="Ouvrir tuile 2">Voir</button>
+          </div>
+        </div>
+      </article>
+
+      <!-- Tuile 3 -->
+      <article class="tile" role="listitem" aria-label="Tuile 3 — Exemple">
+        <img class="thumb" src="https://picsum.photos/seed/3/200" alt="Image 3">
+        <div class="content">
+          <h2 class="title">Titre de la tuile 3</h2>
+          <p class="desc">Encore une tuile pour montrer l'alignement et la répétition. Le layout gardera toujours 2 colonnes tant que l'écran est assez large.</p>
+          <div class="meta">
+            <span>★ 4.8</span>
+            <span>•</span>
+            <span>5 min</span>
+            <button class="btn" type="button" aria-label="Ouvrir tuile 3">Détails</button>
+          </div>
+        </div>
+      </article>
+
+      <!-- Tuile 4 -->
+      <article class="tile" role="listitem" aria-label="Tuile 4 — Exemple">
+        <img class="thumb" src="https://picsum.photos/seed/4/200" alt="Image 4">
+        <div class="content">
+          <h2 class="title">Titre de la tuile 4</h2>
+          <p class="desc">Dernière tuile de l'exemple. Remplacez les images, titres, descriptions et boutons par votre contenu.</p>
+          <div class="meta">
+            <span>💬 8</span>
+            <span>•</span>
+            <span>1 h</span>
+            <button class="btn" type="button" aria-label="Ouvrir tuile 4">Lire</button>
+          </div>
+        </div>
+      </article>
+    </div>
+  </div>
+</body>
+</html>
