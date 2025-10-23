@@ -1,204 +1,130 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="fr">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>Grid : 2 tuiles par ligne</title>
-<style>
-  :root{
-    --bg: #f6f7fb;
-    --card: #ffffff;
-    --accent: #4f46e5;
-    --muted: #6b7280;
-    --radius: 12px;
-    --gap: 20px;
-    --shadow: 0 6px 18px rgba(15,23,42,0.06);
-    font-family: Inter, ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
-  }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Site Mathématiques et Informatiques</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-  body{
-    margin:0;
-    background:var(--bg);
-    color:#111827;
-    -webkit-font-smoothing:antialiased;
-    -moz-osx-font-smoothing:grayscale;
-    padding:32px;
-  }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 2rem;
+        }
 
-  .wrap{
-    max-width:1100px;
-    margin:0 auto;
-  }
+        h1 {
+            color: white;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            text-align: center;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
 
-  h1{
-    margin:0 0 18px 0;
-    font-size:1.4rem;
-    letter-spacing: -0.2px;
-  }
+        .container {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 2rem;
+            max-width: 900px;
+            width: 100%;
+        }
 
-  /* Grid : 2 tuiles par ligne */
-  .grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr); /* <-- deux tuiles par ligne */
-    gap: var(--gap);
-    align-items: start;
-  }
+        .tile {
+            background: white;
+            border-radius: 15px;
+            padding: 3rem 2rem;
+            text-align: center;
+            text-decoration: none;
+            color: #333;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            position: relative;
+            overflow: hidden;
+        }
 
-  /* Responsive : 1 tuile sur petits écrans */
-  @media (max-width: 720px){
-    .grid { grid-template-columns: 1fr; }
-  }
+        .tile::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.1), rgba(118, 75, 162, 0.1));
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
 
-  .tile {
-    background: var(--card);
-    border-radius: var(--radius);
-    box-shadow: var(--shadow);
-    padding:18px;
-    display: flex;
-    gap:14px;
-    align-items: flex-start;
-    transition: transform .18s ease, box-shadow .18s ease;
-    border: 1px solid rgba(15,23,42,0.04);
-  }
-  .tile:focus-within,
-  .tile:hover {
-    transform: translateY(-6px);
-    box-shadow: 0 14px 30px rgba(15,23,42,0.08);
-    outline: none;
-  }
+        .tile:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+        }
 
-  .thumb {
-    width:92px;
-    height:92px;
-    border-radius:10px;
-    flex: 0 0 92px;
-    display:block;
-    object-fit:cover;
-    background: linear-gradient(135deg,#eef2ff,#eefcf6);
-    border:1px solid rgba(0,0,0,0.03);
-  }
+        .tile:hover::before {
+            opacity: 1;
+        }
 
-  .content{
-    flex:1;
-    min-width:0; /* important pour le texte tronqué */
-  }
+        .tile-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            position: relative;
+            z-index: 1;
+        }
 
-  .title{
-    margin:0 0 6px 0;
-    font-size:1rem;
-    font-weight:600;
-    color:#0f172a;
-  }
+        .tile-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            position: relative;
+            z-index: 1;
+        }
 
-  .desc{
-    margin:0 0 10px 0;
-    color:var(--muted);
-    font-size:0.925rem;
-    line-height:1.35;
-    display:-webkit-box;
-    -webkit-line-clamp:3;
-    -webkit-box-orient:vertical;
-    overflow:hidden;
-  }
+        @media (max-width: 768px) {
+            .container {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
 
-  .meta{
-    display:flex;
-    gap:8px;
-    align-items:center;
-    font-size:0.85rem;
-    color:var(--muted);
-  }
+            h1 {
+                font-size: 2rem;
+                margin-bottom: 2rem;
+            }
 
-  .btn{
-    margin-left:auto;
-    background:var(--accent);
-    color:white;
-    border:none;
-    padding:8px 12px;
-    border-radius:8px;
-    font-weight:600;
-    cursor:pointer;
-    font-size:0.9rem;
-    transition:opacity .12s ease, transform .12s ease;
-  }
-  .btn:active{ transform: translateY(1px); }
-  .btn:focus{ outline: 3px solid rgba(79,70,229,0.18); }
-
-  /* small utility to make the whole tile keyboard clickable (if link) */
-  .tile a.tile-link{
-    display:flex;
-    text-decoration:none;
-    color:inherit;
-    width:100%;
-  }
-
-</style>
+            .tile {
+                padding: 2rem 1.5rem;
+            }
+        }
+    </style>
 </head>
 <body>
-  <div class="wrap">
-    <h1>Les différentes catégories</h1>
+    <h1>Site Mathématiques et Informatiques</h1>
+    
+    <div class="container">
+        <a href="https://thomasricart.github.io/" class="tile">
+            <div class="tile-icon">📐</div>
+            <div class="tile-title">Mathématiques</div>
+        </a>
 
-    <div class="grid" role="list">
-      <!-- Tuile 1 -->
-      <article class="tile" role="listitem" aria-label="Tuile 1 — Exemple">
-        <img class="thumb" src="https://picsum.photos/seed/1/200" alt="Image 1">
-        <div class="content">
-          <h2 class="title">Curiculum Vitae</h2>
-          <p class="desc">A cet endroit, vous trouverez tout ce qui me concerne</p>
-          <div class="meta">
-            <span>❤️ 24</span>
-            <span>•</span>
-            <span>2 min</span>
-            <button class="btn" type="button" aria-label="Ouvrir tuile 1">Ouvrir</button>
-          </div>
-        </div>
-      </article>
+        <a href="https://thomasricart.github.io/" class="tile">
+            <div class="tile-icon">💻</div>
+            <div class="tile-title">Informatique</div>
+        </a>
 
-      <!-- Tuile 2 -->
-      <article class="tile" role="listitem" aria-label="Tuile 2 — Exemple">
-        <img class="thumb" src="https://picsum.photos/seed/2/200" alt="Image 2">
-        <div class="content">
-          <h2 class="title">Travaux pédagogiques en Mathématiques</h2>
-          <p class="desc">A la fois les travaux personnels utilisés en classe mais également les ressources créées dans le cadre des formations BTS en Mathématiques</p>
-          <div class="meta">
-            <span>📁 Catégorie</span>
-            <span>•</span>
-            <span>10 min</span>
-            <button class="btn" type="button" aria-label="Ouvrir tuile 2">Voir</button>
-          </div>
-        </div>
-      </article>
+        <a href="https://thomasricart.github.io/" class="tile">
+            <div class="tile-icon">🎓</div>
+            <div class="tile-title">Seconde SNT</div>
+        </a>
 
-      <!-- Tuile 3 -->
-      <article class="tile" role="listitem" aria-label="Tuile 3 — Exemple">
-        <img class="thumb" src="https://picsum.photos/seed/3/200" alt="Image 3">
-        <div class="content">
-          <h2 class="title">Travaux pédagogiques en Mathématiques</h2>
-          <p class="desc">Encore une tuile pour montrer l'alignement et la répétition. Le layout gardera toujours 2 colonnes tant que l'écran est assez large.</p>
-          <div class="meta">
-            <span>★ 4.8</span>
-            <span>•</span>
-            <span>5 min</span>
-            <button class="btn" type="button" aria-label="Ouvrir tuile 3">Détails</button>
-          </div>
-        </div>
-      </article>
-
-      <!-- Tuile 4 -->
-      <article class="tile" role="listitem" aria-label="Tuile 4 — Exemple">
-        <img class="thumb" src="https://picsum.photos/seed/4/200" alt="Image 4">
-        <div class="content">
-          <h2 class="title">Travaux académiques</h2>
-          <p class="desc">Dernière tuile de l'exemple. Remplacez les images, titres, descriptions et boutons par votre contenu.</p>
-          <div class="meta">
-            <span>💬 8</span>
-            <span>•</span>
-            <span>1 h</span>
-            <button class="btn" type="button" aria-label="Ouvrir tuile 4">Lire</button>
-          </div>
-        </div>
-      </article>
+        <a href="https://thomasricart.github.io/" class="tile">
+            <div class="tile-icon">👤</div>
+            <div class="tile-title">Perso</div>
+        </a>
     </div>
-  </div>
 </body>
 </html>
