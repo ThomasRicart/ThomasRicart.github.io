@@ -13,3 +13,12 @@ markdown_extensions:
 
 extra_javascript:
   - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
+
+nav:
+  - Accueil: index.md
+  - Cours:
+      - Chapitre 1: cours/chap1.md
+      - Chapitre 2: cours/chap2.md
+  - Travaux pratiques:
+      - TP 1: tp/tp1.md
+      - TP 2: tp/tp2.md
