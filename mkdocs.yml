@@ -1,0 +1,15 @@
+site_name: Cours NSI – Terminale
+site_url: https://tonpseudo.github.io/cours-nsi/
+
+theme:
+  name: material
+
+markdown_extensions:
+  - pymdownx.arithmatex:
+      generic: true
+  - admonition
+  - pymdownx.superfences
+  - pymdownx.details
+
+extra_javascript:
+  - https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js
