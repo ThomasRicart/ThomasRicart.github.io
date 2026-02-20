@@ -15,7 +15,7 @@ On cherche les réels $a$ et $b$ tels que $f(t) = (at + b)\,e^{-0{,}3t}$ modéli
 
 ### Question 1 — Détermination de $a$ et $b$
 
-**Condition 1 :** À $t = 0$, la température vaut 20 °C.
+**Condition 1 :** À \\(t = 0\\), la température vaut 20 °C.
 
 $$f(0) = (a \times 0 + b)\,e^{0} = b \times 1 = b = 20$$
 
