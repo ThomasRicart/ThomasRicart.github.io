@@ -1,3 +1,7 @@
+---
+layout: default
+title: Chapitre 1 – Ordonnancement
+---
 # Correction — TP Dérivation et thermique
 **BTS CIEL 1re année — 20 février / 13 mars 2026**
 
